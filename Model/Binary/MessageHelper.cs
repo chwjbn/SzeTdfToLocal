@@ -14,6 +14,29 @@ namespace SzeTdfToLocal.Model.Binary
 
 
         /// <summary>
+        /// 获取消息字符串
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static string GetMessageString(char[] data)
+        {
+            var sRet = new string(data);
+            return sRet;
+        }
+
+        /// <summary>
+        /// 获取消息字符串二进制
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static char[] FromMessageString(string data)
+        {
+            var buffer = data.ToCharArray();
+            return buffer;
+        }
+
+
+        /// <summary>
         /// 解析指数消息数据包
         /// </summary>
         /// <param name="data"></param>

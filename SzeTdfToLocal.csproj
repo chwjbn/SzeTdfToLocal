@@ -71,6 +71,7 @@
     <Compile Include="Model\Binary\MessageHelper.cs" />
     <Compile Include="Model\Binary\MessageModel.cs" />
     <Compile Include="Model\Binary\MessageTailerNode.cs" />
+    <Compile Include="Model\Binary\Number\BigEndianInt64.cs" />
     <Compile Include="Model\NetClient.cs" />
     <Compile Include="Model\Binary\Number\BigEndianUInt64.cs" />
     <Compile Include="Model\Binary\Number\BigEndianUInt32.cs" />

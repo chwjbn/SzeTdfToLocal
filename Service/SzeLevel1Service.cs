@@ -24,9 +24,6 @@ namespace SzeTdfToLocal.Service
 
         private void MDataClient_OnMessageRecv(object sender, MessageModel e)
         {
-
-           //Console.WriteLine("[{0}]msgType={1},msgBodyLen={2},msgTailer.Sum={3}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), e.mMsgHeader.msgType, e.mMsgHeader.bodyLength, e.mMsgTailer.checkSum);
-
             if (e.mMsgBody==null)
             {
                 return;
@@ -46,13 +43,11 @@ namespace SzeTdfToLocal.Service
                 mPubClient.PubStockMessage(msgBody);
             }
 
-            Console.WriteLine("[{0}]msgType={1},msgBodyLen={2},msgBody Type ={3}, msgTailer.Sum={4}",DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), e.mMsgHeader.msgType, e.mMsgHeader.bodyLength, msgBodyName,e.mMsgTailer.checkSum);
-
         }
 
         public  void showStatus()
         {
-            
+            this.mPubClient.showStatus();
         }
     }
 }

@@ -8,6 +8,8 @@ using SzeTdfToLocal.Model.Binary.Number;
 
 namespace SzeTdfToLocal.Model.Binary.Market
 {
+
+    [StructLayout(LayoutKind.Sequential)]
     public struct MarketMessageNode : IMessageBody
     {
         /// <summary>
@@ -25,20 +27,20 @@ namespace SzeTdfToLocal.Model.Binary.Market
         /// 300111,010,现货（股票，基金，债券等）集中竞价交易快照行情
         /// 309011,900,指数快照行情
         /// </summary>
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 3)]
-        public string MDStreamID ;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 3)]
+        public char[] MDStreamID ;
 
         /// <summary>
         /// 证券代码,char[8]
         /// </summary>
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 8)]
-        public string SecurityID ;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 8)]
+        public char[] SecurityID ;
 
         /// <summary>
         /// 证券代码源,char[4]
         /// </summary>
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 4)]
-        public string SecurityIDSource ;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+        public char[] SecurityIDSource ;
 
         /// <summary>
         /// 产品所处的交易阶段代码,char[8]
@@ -56,8 +58,8 @@ namespace SzeTdfToLocal.Model.Binary.Market
         /// 0=正常状态
         /// 1=全天停牌
         /// </summary>
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 8)]
-        public string TradingPhaseCode ;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 8)]
+        public char[] TradingPhaseCode ;
 
         /// <summary>
         /// 昨收价
@@ -67,17 +69,17 @@ namespace SzeTdfToLocal.Model.Binary.Market
         /// <summary>
         /// 成交笔数
         /// </summary>
-        public BigEndianUInt64 NumTrades ;
+        public BigEndianInt64 NumTrades ;
 
         /// <summary>
         /// 成交总量
         /// </summary>
-        public BigEndianUInt64 TotalVolumeTrade ;
+        public BigEndianInt64 TotalVolumeTrade ;
 
         /// <summary>
         /// 成交总金额
         /// </summary>
-        public BigEndianUInt64 TotalValueTrade ;
+        public BigEndianInt64 TotalValueTrade ;
 
         public byte[] GetBytes()
         {

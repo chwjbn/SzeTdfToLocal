@@ -32,6 +32,7 @@ namespace SzeTdfToLocal.Model
 
             try
             {
+                
 
                 YunLib.LogWriter.Log("NetClient doConnet to {0}:{1} Begin", this.mHost, this.mPort);
                 Console.WriteLine("NetClient doConnet to {0}:{1} Begin", this.mHost, this.mPort);
@@ -119,6 +120,7 @@ namespace SzeTdfToLocal.Model
 
             while (true)
             {
+
                 if (!this.IsConnected())
                 {
                     break;
@@ -173,30 +175,7 @@ namespace SzeTdfToLocal.Model
                     return bRet;
                 }
 
-                IPGlobalProperties ipProperties = IPGlobalProperties.GetIPGlobalProperties();
-                TcpConnectionInformation[] tcpConnections = ipProperties.GetActiveTcpConnections();
-
-                foreach (TcpConnectionInformation c in tcpConnections)
-                {
-                    TcpState stateOfConnection = c.State;
-
-                    if (!c.LocalEndPoint.Equals(this.mNetSocket.LocalEndPoint))
-                    {
-                        continue;
-                    }
-
-                    if (!c.RemoteEndPoint.Equals(this.mNetSocket.RemoteEndPoint))
-                    {
-                        continue;
-                    }
-
-                    if (stateOfConnection == TcpState.Established)
-                    {
-                        bRet = true;
-                        break;
-                    }
-                                         
-                }
+                bRet = true;
 
             }
             catch (Exception ex)

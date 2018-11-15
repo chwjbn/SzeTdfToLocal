@@ -8,6 +8,8 @@ using SzeTdfToLocal.Model.Binary.Number;
 
 namespace SzeTdfToLocal.Model.Binary.Market
 {
+
+    [StructLayout(LayoutKind.Sequential)]
     public struct IndexMDEntry
     {
 
@@ -19,8 +21,8 @@ namespace SzeTdfToLocal.Model.Binary.Market
         /// xc=最高指数
         /// xd=最低指数
         /// </summary>
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 2)]
-        public string MDEntryType;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
+        public char[] MDEntryType;
 
 
         /// <summary>

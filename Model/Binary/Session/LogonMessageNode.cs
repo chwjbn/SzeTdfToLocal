@@ -8,6 +8,8 @@ using SzeTdfToLocal.Model.Binary.Number;
 
 namespace SzeTdfToLocal.Model.Binary.Session
 {
+
+    [StructLayout(LayoutKind.Sequential)]
     public struct LogonMessageNode:IMessageBody
     {
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 20)]

@@ -37,7 +37,12 @@ namespace SzeTdfToLocal.Model
             ThreadPool.QueueUserWorkItem(new WaitCallback(doCheckConnectThreadFunc));
             ThreadPool.QueueUserWorkItem(new WaitCallback(loginThreadFunc));
             ThreadPool.QueueUserWorkItem(new WaitCallback(heartBtMessageThreadFunc));
-            ThreadPool.QueueUserWorkItem(new WaitCallback(doRecvThreadFunc));
+
+            for (int i=0;i<4; ++i)
+            {
+                ThreadPool.QueueUserWorkItem(new WaitCallback(doRecvThreadFunc));
+            }
+            
         }
 
         /// <summary>
@@ -107,6 +112,9 @@ namespace SzeTdfToLocal.Model
 
                 //消息头
                 var msgHeadSize = YunLib.DataHelper.StructSize<MessageHeaderNode>();
+
+               
+
                 var msgHeaderData = this.mNetClient.recvBuffer(msgHeadSize);
                 var msgHeader = YunLib.DataHelper.BytesToStruct<MessageHeaderNode>(msgHeaderData);
 
@@ -114,6 +122,7 @@ namespace SzeTdfToLocal.Model
                 UInt32 bodyLen = msgHeader.bodyLength;
                 var msgBodyData = this.mNetClient.recvBuffer((int)bodyLen);
 
+               
                 //消息尾
                 var msgTailerSize= YunLib.DataHelper.StructSize<MessageTailerNode>();
                 var msgTailerData = this.mNetClient.recvBuffer(msgTailerSize);
@@ -124,7 +133,11 @@ namespace SzeTdfToLocal.Model
                 msgBodyData.CopyTo(msgData, msgHeaderData.Length);
                 msgTailerData.CopyTo(msgData, msgHeaderData.Length + msgBodyData.Length);
 
+               
+                
                 msg = MessageModel.BuildMessage(msgData);
+
+                
             }
             catch (Exception ex)
             {
@@ -229,7 +242,6 @@ namespace SzeTdfToLocal.Model
             {
                 try
                 {
-
                     if (!this.mNetClient.IsConnected())
                     {
                         Thread.Sleep(10);
@@ -238,9 +250,11 @@ namespace SzeTdfToLocal.Model
 
                     var msg = this.peekMessage();
 
+                   
                     //没有获取到消息
                     if (msg.mMsgHeader.msgType<1)
                     {
+                        Thread.Sleep(10);
                         continue;
                     }
 
@@ -251,7 +265,7 @@ namespace SzeTdfToLocal.Model
                     }
 
                     if (this.OnMessageRecv!=null)
-                    {
+                    {  
                         this.OnMessageRecv(this, msg);
                     }
 

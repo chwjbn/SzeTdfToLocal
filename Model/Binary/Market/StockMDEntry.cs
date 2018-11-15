@@ -8,6 +8,8 @@ using SzeTdfToLocal.Model.Binary.Number;
 
 namespace SzeTdfToLocal.Model.Binary.Market
 {
+
+    [StructLayout(LayoutKind.Sequential)]
     public struct StockMDEntry
     {
 
@@ -32,8 +34,8 @@ namespace SzeTdfToLocal.Model.Binary.Market
         /// xf=跌停价
         /// xg=合约持仓量
         /// </summary>
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 2)]
-        public string MDEntryType;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
+        public char[] MDEntryType;
 
 
         /// <summary>

@@ -125,7 +125,9 @@ namespace SzeTdfToLocal.Model.Binary
                     marketMsg= YunLib.DataHelper.BytesToStruct<MarketMessageNode>(bodyData);
                     msgData.mMsgBody = marketMsg;
 
-                    if (marketMsg.MDStreamID=="01")
+                    var streamId = MessageHelper.GetMessageString(marketMsg.MDStreamID);
+
+                    if (streamId=="010")
                     {
                         msgData.mMsgBody = MessageHelper.ParseStockMessageNode(bodyData);
                     }
@@ -145,7 +147,9 @@ namespace SzeTdfToLocal.Model.Binary
                     marketMsg = YunLib.DataHelper.BytesToStruct<MarketMessageNode>(bodyData);
                     msgData.mMsgBody = marketMsg;
 
-                    if (marketMsg.MDStreamID == "90")
+                    var streamId = MessageHelper.GetMessageString(marketMsg.MDStreamID);
+
+                    if (streamId=="900")
                     {
                         msgData.mMsgBody = MessageHelper.ParseIndexMessageNode(bodyData);
                     }
